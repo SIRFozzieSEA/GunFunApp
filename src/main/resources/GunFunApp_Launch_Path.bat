@@ -1,1 +1,1 @@
- java -jar ..\gunfunapp-0.0.1-SNAPSHOT.jar
+start javaw -jar ..\gunfunapp-0.0.1-SNAPSHOT.jar

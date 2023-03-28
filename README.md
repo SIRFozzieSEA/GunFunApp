@@ -38,7 +38,7 @@ To get the project running for the first time (build tables, app folders, sample
 
 ### Release process
 
-Run `mvn install` to create a new jar file and then when running outside of Eclipse (or other IDE), use the `java -jar gunfunapp-0.0.1-SNAPSHOT.jar` to execute.  As I run this at startup, I have a batch file which launches it from the `target` folder. This will also keep from making mistakes like running your local target folder at the same time as working on code.
+Run `mvn install` to create a new jar file and then when running outside of Eclipse (or other IDE), use the `java -jar gunfunapp-0.0.1-SNAPSHOT.jar` to execute, or `start javaw -jar ..\gunfunapp-0.0.1-SNAPSHOT.jar` to execute without a console window.  As I run this at startup, I have a batch file which launches it from the `target` folder. This will also keep from making mistakes like running your local target folder at the same time as working on code.
 
 
 ### Other Notes
