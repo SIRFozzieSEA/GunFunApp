@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 
 import com.codef.gunfunapp.models.entities.Registry;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ModelUtils {
 	
-	private static final Logger LOGGER = LogManager.getLogger(ModelUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ModelUtils.class);
 
 	public static boolean BUILD_JSON = false;
 	public static boolean OUTPUT_JSON = false;

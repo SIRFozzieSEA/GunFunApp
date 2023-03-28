@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 import javax.activation.FileTypeMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
@@ -35,7 +35,7 @@ public class MainController {
 	@Qualifier("jdbcMaster")
 	private JdbcTemplate jdbcTemplateOne;
 	
-	private static final Logger LOGGER = LogManager.getLogger(MainController.class);
+//	private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
 	/*
 	 * Main App Windows
@@ -56,8 +56,12 @@ public class MainController {
 			return "index_nc";
 		}
 		
-		LOGGER.info("indexLaunch() hit!");
-		LOGGER.debug("indexLaunch() hit!");
+//		LOGGER.trace("A TRACE Message");
+//		LOGGER.debug("A DEBUG Message");
+//		LOGGER.info("An INFO Message");
+//		LOGGER.warn("A WARN Message");
+//		LOGGER.error("An ERROR Message");
+        
 		return "index";
 		
 		

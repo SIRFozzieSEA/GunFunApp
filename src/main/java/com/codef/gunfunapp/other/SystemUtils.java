@@ -23,15 +23,15 @@ import java.util.TreeSet;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.codef.gunfunapp.GunFunConfiguration;
 
 public class SystemUtils {
 	
-	private static final Logger LOGGER = LogManager.getLogger(SystemUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SystemUtils.class);
 
 	public static java.sql.Date parseDate(String date) {
 		try {
