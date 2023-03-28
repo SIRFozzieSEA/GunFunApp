@@ -36,6 +36,11 @@ To get the project running for the first time (build tables, app folders, sample
 - In the left navigation bar, click `Maintenance Functions` then `Rebuild Quiz Questions`.
 - That's it!  Have fun!
 
+### Release process
+
+Run `mvn install` to create a new jar file and then when running outside of Eclipse (or other IDE), use the `java -jar gunfunapp-0.0.1-SNAPSHOT.jar` to execute.  As I run this at startup, I have a batch file which launches it from the `target` folder. This will also keep from making mistakes like running your local target folder at the same time as working on code.
+
+
 ### Other Notes
 
 - **Backups** -- The backup feature allows you to backup when the application is running.  Data will be exported as SQL dump, tab delimited files, images will be backed up in a .zip file, manuals will be backed up in a .zip file as well.  Backing up the properties file will result in a single file.  All backups are prefixed by the date, and will be written into the `[GUNFUN_APP_FOLDER]\_backup` folder.  Also included in the `[GUNFUN_APP_FOLDER]\_data` folder is a .bat script that will copy the raw H2 data file... the database should **not be running** when this script is executed to make sure all data is copied.
