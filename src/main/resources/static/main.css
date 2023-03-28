@@ -1,0 +1,447 @@
+body {
+	margin: 0px;
+	font-family: 'Verdana', sans-serif;
+	font-size: 10pt;
+	letter-spacing: -.03em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #FFFF99
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+textarea {
+	font-family: 'Verdana', sans-serif;
+	font-size: 9pt;
+}
+
+table {
+	border: 0pt;
+    width: 95%;
+    margin-top: 15pt;
+    padding: 4px;
+    border-spacing: 4px;
+}
+
+a {
+	color: #000000;
+	text-decoration: none
+}
+
+a:visited {
+	color: #000000;
+	text-decoration: none
+}
+
+a:active {
+	color: #000000;
+	text-decoration: none
+}
+
+a:hover {
+	color: red;
+	text-decoration: none
+}
+
+#clear {
+	clear: both;
+}
+
+.div-nav {
+	background-color: #FFFF99;
+	height: 100%;
+	width: 210px;
+	margin: 0px;
+	float: left;
+	position: fixed;
+}
+
+.gunfun-big {
+	font-size: 48pt;
+	font-weight: bold;
+	letter-spacing: -.1em;
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+/* navigation */
+
+.table-nav {
+	width: 90%;
+	margin: 10px;
+	padding: 10px;
+	border-spacing: 1px;
+}
+
+.nav-bold-header {
+	font-size: 20pt;
+	font-weight: bold;
+	letter-spacing: -.05em;
+}
+
+.nav-bold-sub-header {
+	font-size: 12pt;
+	font-weight: bold;
+	padding-top: 10px;
+}
+
+/* main elements */
+
+.main-table-fill-break {
+	background-color: #FFCC00;
+	text-align: center;
+	font-size: 6pt;
+}
+
+.main-table-fill-space {
+	text-align: center;
+	font-size: 6pt;
+}
+
+
+.main-table-fill-space-smaller {
+	text-align: center;
+	font-size: 1pt;
+}
+
+.main-table-fill-record-stats {
+	text-align: center;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.main-table-bold-header {
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: -.05em;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.message-text {
+	font-size: 14pt;
+	font-weight: bold;
+	letter-spacing: -.05em;
+	text-align: center;
+	margin-top: 100px;
+}
+
+.error-text {
+	font-size: 14pt;
+	font-weight: bold;
+	letter-spacing: -.05em;
+	text-align: center;
+	margin-top: 0px;
+}
+
+/* search */
+
+.table-search {
+	margin-top: 0px;
+    width: auto;
+    padding: 8px;
+    border-spacing: 8px;
+}
+
+/* reports */
+
+.table-report {
+	margin-top: 0px;
+    width: auto;
+    padding: 0px;
+    border-spacing: 2px;
+    border: 0px
+}
+
+/* heads */
+
+.table-report-head-center {
+	background-color: #FFCC00;
+	text-align: center;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4pt;
+    padding-bottom: 4pt;
+    font-weight: bold;
+}
+
+.table-report-head-right {
+	background-color: #FFCC00;
+	text-align: right;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4pt;
+    padding-bottom: 4pt;
+    font-weight: bold;
+}
+
+.table-report-head-left {
+	background-color: #FFCC00;
+	text-align: left;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4pt;
+    padding-bottom: 4pt;
+    font-weight: bold;
+}
+
+/* totals */
+
+.table-report-total-right {
+	background-color: #FFCC00;
+	text-align: right;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4pt;
+    padding-bottom: 4pt;
+    font-weight: bold;
+    color: black;
+}
+
+
+/* rows */
+
+.table-report-row-center {
+	text-align: center;
+	padding-left: 8px;
+    padding-right: 8px;
+}
+
+.table-report-row-center-bold-red {
+	text-align: center;
+	padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bold;
+    color: red;
+}
+
+.table-report-row-right {
+	text-align: right;
+	padding-left: 8px;
+    padding-right: 8px;
+}
+
+.table-report-row-left {
+	text-align: left;
+	padding-left: 8px;
+    padding-right: 8px;
+}
+
+.table-report-row-center-more-vspace {
+	text-align: center;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+.table-report-row-right-more-vspace {
+	text-align: right;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+.table-report-row-left-more-vspace {
+	text-align: left;
+	padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+.table-report-row-left-even-more-vspace {
+	text-align: left;
+	padding-left: 8px;
+    padding-right: 20px;
+    padding-bottom: 4px;
+}
+
+/* stats */
+
+.table-stats {
+	margin-top: 38px;
+    width: auto;
+    padding: 0px;
+    border-spacing: 0px;
+}
+
+.stats-head {
+	font-size: 12pt;
+    font-weight: bold;	
+}
+.stats-right {
+	text-align: right;
+}
+.stats-left {
+	text-align: left;
+}
+
+
+.stats-manufacturers {
+	text-align: left;
+	padding-left: 20px;
+}
+
+/* add/edit forms */
+.field-label {
+	font-size: 10pt;
+    font-weight: bold;
+}
+
+.field-label-gray {
+	font-size: 10pt;
+    font-weight: bold;
+    color: #666699;
+}
+
+.field-label-input {
+	margin-top: 3px;
+	width: 168px;
+}
+
+/* search results */
+
+.table-gun {
+    width: 260px;
+    padding: 0px;
+    border-spacing: 0px;
+}
+
+.gun-header-left {
+	text-align: left;
+	background-color: #FFCC00;
+	padding: 10px;
+	width: auto;
+}
+
+.gun-header-right {
+	text-align: right;
+	background-color: #FFCC00;
+	padding: 10px;
+	width: 40px;
+	vertical-align: bottom;
+}
+
+.gun-header-dirty-left {
+	text-align: left;
+	background-color: #663300;
+	padding: 10px;
+	width: auto;
+	color: white;
+}
+
+.gun-header-dirty-right {
+	text-align: right;
+	background-color: #663300;
+	padding: 10px;
+	width: 40px;
+	vertical-align: bottom;
+	color: white;
+}
+
+.gun-bottom-left {
+	text-align: left;
+	padding: 10px;
+	width: auto;
+	font-weight: bold;
+}
+
+.gun-bottom-right {
+	text-align: right;
+	padding: 10px;
+	width: 40px;
+	vertical-align: bottom;
+}
+
+.gun-name {
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.gun-manufacturer {
+	font-size: 13pt;
+}
+
+.gun-model {
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+
+
+
+/* other */
+
+
+.button-label {
+	font-size: 10pt;
+	font-weight: bold;
+	letter-spacing: -.05em;
+}
+
+.final-score {
+	text-align: center;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: medium;
+}
+
+.quiz-question-left {
+	text-align: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	font-weight: bold;
+}
+
+.correct-response {
+	text-align: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: large;
+	font-weight: bold;
+	color: #009933;
+}
+
+.incorrect-response {
+	text-align: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: large;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.correct-response-two {
+	text-align: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	color: #009933;
+}
+
+.incorrect-response-two {
+	text-align: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.quiz-question {
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+
+
+
+
+
+
+
+
+
+
+

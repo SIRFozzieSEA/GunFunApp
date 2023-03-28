@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+<script src="/validation.js"></script>
+</head>
+<body onLoad="document.f1.Nickname.focus()">
+	<script>
+		function genericValidator(o_form)
+		{
+			if (!checkNumericValue('BarrelLengthMin', 'Barrel Length Min', 1, 50)) return false;
+			if (!checkNumericValue('BarrelLengthMax', 'Barrel Length Max', 1, 50)) return false;
+			if (!checkNumericValue('PurchaseCostMin', 'Purchase Cost Min', 1, 5000)) return false;
+			if (!checkNumericValue('PurchaseCostMax', 'Purchase Cost Max', 1, 5000)) return false;
+			if (!checkH2Date('PurchaseDateMin', 'Purchase Date Min')) return false;
+			if (!checkH2Date('PurchaseDateMax', 'Purchase Date Max')) return false;
+			
+			return true;
+		}
+	</script>
+	<form name="f1" onsubmit="return genericValidator(this)" action="#" th:action="@{/registry_search}" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" th:text="${reportTitle}">-</td>
+			</tr>
+			<tr>
+				<td class="main-table-fill-break">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-search" border="0">
+							<tr>
+								<td valign="top"><B>Nickname:</B><br>
+									<input name="Nickname" style="width: 174px" type="text" autocomplete="off"><br />
+									<input checked="true" name="NicknameRadio" type="radio"
+									value="or ">Or <input name="NicknameRadio" type="radio"
+									value="and"> And &nbsp;&nbsp;&nbsp;Order: <input
+									name="NicknameOrder" style="width: 20px" type="text" autocomplete="off"></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td><b>Barrel Length:</b><br>
+									<input id="BarrelLengthMin" name="BarrelLengthMin" style="width: 72px" type="text" autocomplete="off">
+									to <input id="BarrelLengthMax" name="BarrelLengthMax" style="width: 73px" type="text" autocomplete="off">
+									<br>
+								<input checked="true" name="BarrelLengthRadio" type="radio"
+									value="or ">Or <input name="BarrelLengthRadio"
+									type="radio" value="and"> And &nbsp;&nbsp;&nbsp;Order: <input
+									name="BarrelLengthOrder" style="width: 20px" type="text" autocomplete="off"></td>
+							</tr>
+							<tr>
+								<td><b>Make:</b><br>
+									<select  name="MakeDrop" size="1"
+									style="width: 182px">
+										<option></option>
+										<option th:each="make : ${allMakesSet_TreeSetString}" th:value="${make}" th:text="${make}"></option>
+								</select><br /> <input checked="true" name="MakeRadio" type="radio"
+									value="or ">Or <input name="MakeRadio" type="radio"
+									value="and"> And &nbsp;&nbsp;&nbsp;Order: <input
+									name="MakeOrder" style="width: 20px" type="text" autocomplete="off"></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td><b>Purchase Cost:</b><br>
+									<input id="PurchaseCostMin" name="PurchaseCostMin" style="width: 72px" type="text" autocomplete="off">
+									to <input id="PurchaseCostMax" name="PurchaseCostMax" style="width: 73px"
+									type="text" autocomplete="off"> <br>
+								<input checked="true" name="PurchaseCostRadio" type="radio"
+									value="or ">Or <input name="PurchaseCostRadio"
+									type="radio" value="and"> And &nbsp;&nbsp;&nbsp;Order: <input
+									name="PurchaseCostOrder" style="width: 20px" type="text" autocomplete="off"></td>
+							</tr>
+							<tr>
+								<td><b>Model:</b><br>
+									<input name="Model" style="width: 174px" type="text" autocomplete="off"><br>
+								<input checked="true" name="ModelRadio" type="radio" value="or ">Or
+									<input name="ModelRadio" type="radio" value="and"> And
+									&nbsp;&nbsp;&nbsp;Order: <input name="ModelOrder" style="width: 20px"
+									type="text" autocomplete="off"></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td><b>Purchase Date:</b><br>
+									<input id="PurchaseDateMin" name="PurchaseDateMin" style="width: 72px" type="text" autocomplete="off">
+									to <input id="PurchaseDateMax" name="PurchaseDateMax" style="width: 73px" type="text" autocomplete="off">
+									<br>
+								<input checked="true" name="PurchaseDateRadio" type="radio"
+									value="or ">Or <input name="PurchaseDateRadio" type="radio"
+									value="and"> And &nbsp;&nbsp;&nbsp;Order: <input
+									name="PurchaseDateOrder" style="width: 20px" type="text" autocomplete="off"></td>
+							</tr>
+							<tr>
+								<td><b>Caliber:</b><br>
+									<select  name="CaliberDrop" size="1"
+									style="width: 182px">
+										<option></option>
+										<option th:each="caliber : ${allCaliberSet_TreeSetString}" th:value="${caliber}" th:text="${caliber}"></option>
+								</select><br>
+								<input checked="true" name="CaliberRadio" type="radio" value="or ">Or
+									<input name="CaliberRadio" type="radio" value="and"> And
+									&nbsp;&nbsp;&nbsp;Order: <input name="CaliberOrder" style="width: 20px"
+									type="text" autocomplete="off"></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td><b>Serial No:</b><br>
+									<input name="SerialNo" style="width: 174px" type="text" autocomplete="off"><br>
+									<input checked="true" name="SerialRadio" type="radio" value="or ">Or
+									<input name="SerialRadio" type="radio" value="and"> And
+									&nbsp;&nbsp;&nbsp;Order: <input name="SerialOrder" style="width: 20px"
+									type="text" autocomplete="off"></td>
+							</tr>
+							
+							<tr>
+								<td><input name="ShowDirtyOnly" value="Y" type="checkbox" /><b> Show Dirty Only</b></td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td></td>
+							</tr>
+							
+							
+							
+						</table>
+					</div>
+
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-break">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space"><input name="Submit1" type="submit" value="Submit" /></td>
+			</tr>
+			
+
+		</table>
+
+
+
+	</form>
+</body>
+
+</html>

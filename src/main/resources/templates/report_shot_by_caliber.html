@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+	<form action="#" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" th:text="${reportTitle}">-</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-report" border="0">
+							
+							<tr>
+								<td class="table-report-head-center"><a href="?orderBy=CALIBER">Caliber</a></td>
+								<td class="table-report-head-center"><a href="?orderBy=TOTAL_ROUNDS_FIRED">Total Rounds Fired</a></td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="2">&nbsp;</td>
+							</tr>
+							
+							<tr th:each="row : ${report_ArrayListHashMapStringString}">
+								<td class="table-report-row-left-more-vspace" th:text="${row.get('CALIBER')}">-</td>
+								<td class="table-report-row-right" style="padding-right: 55px" th:text="${#numbers.formatDecimal(row.get('TOTAL_ROUNDS_FIRED'), 0, 'COMMA', 0, 'POINT')}">-</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="2">&nbsp;</td>
+							</tr>
+							
+							<tr>
+								<td class="table-report-total-right">TOTAL</td>
+								<td class="table-report-total-right" style="padding-right: 55px" th:text="${#numbers.formatDecimal(reportTotal, 0, 'COMMA', 0, 'POINT')}">-</td>
+							</tr>
+							
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+		</table>
+
+
+
+	</form>
+</body>
+
+</html>

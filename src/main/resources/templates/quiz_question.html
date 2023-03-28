@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+<script src="/validation.js"></script>
+</head>
+<body>
+	<script th:inline="javascript">
+		function genericValidator(o_form)
+		{
+			return true;
+		}
+	</script>
+	<form action="#" onsubmit="return genericValidator(this)" th:action="@{/quiz/question}" th:object="${gunTriviaRoundsQuestions}" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header"><span class="message-text" th:text="${reportTitle}" /></td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space">
+				
+				
+				
+					<table align="center" border="0" cellpadding="4" cellspacing="4" style="width: 700px">
+						<tr>
+							<td class="quiz-question" valign="top" th:text="*{question}"></td>
+							<td rowspan="2">
+								<div th:if="*{imageLocation == 'REGISTRY'}"><a th:href="'/getImageForQuestion?questionPk=' + *{questionPk} + '&size=large'" target="_blank">
+								<img th:src="'/getImageForQuestion?questionPk=' + *{questionPk} + '&size=small'" align="top" /></a>
+								</div>
+								<div th:unless="*{imageLocation == 'REGISTRY'}"></div>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">
+								<select th:field="*{userResponse}" style="width: 180px" >
+									<option value="">---</option>
+					    			<option th:each="answers : ${dropDownAnswers_ArrayListString}" th:value="${answers}" th:text="${answers}"></option>
+								</select>
+							</td>
+						</tr>
+					</table>
+
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space"><input name="Submit1" type="submit" value="Submit" /></td>
+			</tr>
+			
+
+		</table>
+
+		<input name="getAllGunNames" th:value="${getAllGunNames}" type="hidden" />
+		<input name="getAllMakes" th:value="${getAllMakes}" type="hidden" />
+		<input name="getAllModels" th:value="${getAllModels}" type="hidden" />
+		<input name="getAllCalibers" th:value="${getAllCalibers}" type="hidden" />
+		
+		<input th:field="*{roundPk}" type="hidden" />
+		<input th:field="*{questionPk}" type="hidden" />
+
+	</form>
+</body>
+</html>

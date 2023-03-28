@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body onLoad="document.f1.nickname.focus()">
+	<form name="f1" action="#" th:action="@{/range/packsheet}" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" th:text="${reportTitle}">-</td>
+			</tr>
+			<tr>
+				<td class="main-table-fill-break">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="main-table-fill-record-stats" th:text="${searchStats}">-</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-search" border="0">
+							<tr th:each="row, stat : ${report_ArrayListArrayListHashMapStringString}">
+								<td>
+									<th:block th:if="${row.get(0).get('GUN_PK') != ''}">
+									<table class="table-gun" border="0">
+										<tr>
+											<td th:class="${#bools.isTrue(row.get(0).get('GUN_IS_DIRTY'))} ? 'gun-header-dirty-left' : 'gun-header-left'" valign="top"><NOBR>
+											<span class="gun-name" th:text="${row.get(0).get('NICKNAME')}">-</span>
+											<input th:name="'GUN_PK_NICKNAME_' + ${row.get(0).get('GUN_PK')}" th:value="${row.get(0).get('NICKNAME')}" type="hidden" />
+											<br />
+											<span class="gun-manufacturer" th:text="${row.get(0).get('MAKE')}">-</span><br />
+											<span class="gun-model" th:text="${row.get(0).get('MODEL')}">-</span></NOBR></td>
+											<td th:class="${#bools.isTrue(row.get(0).get('GUN_IS_DIRTY'))} ? 'gun-header-dirty-right' : 'gun-header-right'" th:text="${row.get(0).get('CALIBER')}"></td>
+										</tr>
+										<tr>
+											<td valign="top" colspan="2">
+											<a th:href="'/getImage?imageName=/large/' + ${row.get(0).get('NICKNAME')} + '.jpg'" target="_blank">
+											<img th:src="'/getImage?imageName=/small/' + ${row.get(0).get('NICKNAME')} + '.jpg'" align="top" /></a></td>
+										</tr>
+										<tr>
+											<td class="gun-bottom-left" valign="bottom">
+											<input th:name="'GUN_PK_' + ${row.get(0).get('GUN_PK')}" th:value="${row.get(0).get('GUN_PK')}" type="checkbox" />Pack it!</td>
+											<td class="gun-bottom-right"><NOBR>
+											<a th:href="@{/registry_edit?gun_pk={id}(id=${row.get(0).get('GUN_PK')})}" target="main">Details</a> | 
+											<a th:href="'/getPdf?pdfName=' + ${row.get(0).get('NICKNAME')} + '.pdf'" target="_blank">View Manual</a></NOBR></td>
+										</tr>
+									</table>
+									</th:block>
+								</td>
+								<td>&nbsp;&nbsp;&nbsp;</td>
+								<td>
+									<th:block th:if="${row.get(1).get('GUN_PK') != ''}">
+									<table class="table-gun" border="0">
+										<tr>
+											<td th:class="${#bools.isTrue(row.get(1).get('GUN_IS_DIRTY'))} ? 'gun-header-dirty-left' : 'gun-header-left'" valign="top"><NOBR>
+											<span class="gun-name" th:text="${row.get(1).get('NICKNAME')}">-</span>
+											<input th:name="'GUN_PK_NICKNAME_' + ${row.get(1).get('GUN_PK')}" th:value="${row.get(1).get('NICKNAME')}" type="hidden" />
+											<br />
+											<span class="gun-manufacturer" th:text="${row.get(1).get('MAKE')}">-</span><br />
+											<span class="gun-model" th:text="${row.get(1).get('MODEL')}">-</span></NOBR></td>
+											<td th:class="${#bools.isTrue(row.get(1).get('GUN_IS_DIRTY'))} ? 'gun-header-dirty-right' : 'gun-header-right'" th:text="${row.get(1).get('CALIBER')}"></td>
+										</tr>
+										<tr>
+											<td valign="top" colspan="2">
+											<a th:href="'/getImage?imageName=/large/' + ${row.get(1).get('NICKNAME')} + '.jpg'" target="_blank">
+											<img th:src="'/getImage?imageName=/small/' + ${row.get(1).get('NICKNAME')} + '.jpg'" align="top" /></a></td>
+										</tr>
+										<tr>
+											<td class="gun-bottom-left" valign="bottom">
+											<input th:name="'GUN_PK_' + ${row.get(1).get('GUN_PK')}" th:value="${row.get(1).get('GUN_PK')}" type="checkbox" />Pack it!</td>
+											<td class="gun-bottom-right"><NOBR>
+											<a th:href="@{/registry_edit?gun_pk={id}(id=${row.get(1).get('GUN_PK')})}" target="main">Details</a> | 
+											<a th:href="'/getPdf?pdfName=' + ${row.get(1).get('NICKNAME')} + '.pdf'" target="_blank">View Manual</a></NOBR></td>
+										</tr>
+									</table>
+									</th:block>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-break">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space">
+					<span class="button-label">Pack It! - Range Date: </span>
+					<input name="rangeDate" type="rangeDate" style="text-align: center; width: 80px" th:value="${todaysDate}" autocomplete="off" />&nbsp;
+					<input name="Submit1" type="submit" value="Submit" />
+				</td>
+			</tr>
+			
+
+		</table>
+
+
+
+	</form>
+</body>
+
+</html>

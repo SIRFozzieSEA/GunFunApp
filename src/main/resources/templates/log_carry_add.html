@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+<script src="/validation.js"></script>
+</head>
+<body>
+	<script th:inline="javascript">
+	function genericValidator(o_form)
+	{
+    /*[# th:each="i : ${#numbers.sequence( 1, initialBlankEntries)}"]*/
+       if (!checkH2Date('CARRIED_DATE_[[${i}]]', 'Carried Date [[${i}]]')) return false;
+    /*[/]*/
+       return true;
+	}
+	</script>
+	<form name="f1" onsubmit="return genericValidator(this)" action="#" th:action="@{/log/carry_add}" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" th:text="${reportTitle}">-</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-report" border="0">
+							
+							
+							<tr>
+								<td class="table-report-head-center">Gun Nickname</td>
+								<td class="table-report-head-center">Carried Date</td>
+								<td class="table-report-head-center">Carried Day</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="3">&nbsp;</td>
+							</tr>
+							
+							<tr th:each="i : ${#numbers.sequence( 1, initialBlankEntries)}">
+								<td class="table-report-row-center">
+									<select th:name="${'NICKNAME_' + i}" style="width: 180px" ondblclick="setDefault(this)">
+										<option value="">---</option>
+						    			<option th:each="gunName : ${allGunNamesSet_TreeSetString}" th:value="${gunName}" th:text="${gunName}"></option>
+									</select>
+								</td>
+								<td class="table-report-row-center"><input th:id="${'CARRIED_DATE_' + i}" th:name="${'CARRIED_DATE_' + i}" style="text-align: center; width: 80px" th:value="${weekDates_ArrayListDate[i]}" type="text" autocomplete="off" /></td>
+								<td th:class="${weekDates_ArrayListDate[i] == todaysDate ? 'table-report-row-center-bold-red' : 'table-report-row-center'}" th:text="${dayDates_ArrayListString[i]}"></td>
+							</tr>
+							
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space"><input name="Submit1" type="submit" value="Submit" />
+				<input th:name="SHUTDOWN_AFTER" th:value="${shutDownAfter}" type="hidden" autocomplete="off" /></td>
+			</tr>
+			
+
+		</table>
+
+	</form>
+	
+	
+	<script th:inline="javascript">
+	
+	function setDefault(control) {
+		var value = [[${defaultEdc}]];
+		control.value = value;
+	}
+	
+	</script>
+	
+	
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+	<form action="#" th:action="@{/log/ammo}" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header"><a href="/log/ammo?show=all"><span class="message-text" th:text="${reportTitle}" /></a></td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-report" border="0">
+							
+							
+							<tr>
+								<td class="table-report-head-center">Caliber</td>
+								<td class="table-report-head-center">No. of Rounds</td>
+								<td class="table-report-head-center">Purchased Date</td>
+								<td class="table-report-head-center">Purchase Cost</td>
+								<td class="table-report-head-center">Delete?</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="5">&nbsp;</td>
+							</tr>
+							
+							
+							<tr th:each="row : ${report_ArrayListHashMapStringString}">
+									
+								<div th:if="${row.get('CALIBER') == ''}">
+									<div th:if="${row.get('SHOW_TOTAL') == 'NO'}">
+										<td colspan="5"><HR></td>
+									</div>
+								</div>
+								<div th:unless="${row.get('CALIBER') == ''}">
+									<td class="table-report-row-left" th:text="${row.get('CALIBER')}">-</td>
+									<td class="table-report-row-right-more-vspace" style="padding-right: 40px" th:text="${#numbers.formatDecimal(row.get('NO_OF_ROUNDS'), 0, 'COMMA', 0, 'POINT')}">-</td>
+									<td class="table-report-row-center" th:text="${row.get('PURCHASE_DATE')}">-</td>
+									<td class="table-report-row-right-more-vspace"><NOBR><span class="table-report-row-left-even-more-vspace" th:text="'$' + ${#numbers.formatDecimal(row.get('PURCHASE_COST'), 0, 'COMMA', 2, 'POINT')}"></span></NOBR></td>
+									
+									<td class="table-report-row-center"><input th:name="'DELETE_AMMO_PK_' + ${row.get('AMMO_PK')}" type="checkbox" /></td>
+								</div>
+					
+							</tr>
+							
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space">
+					<span class="button-label">Password for Delete: </span>
+					<input name="password" type="password" autocomplete="off" />&nbsp;
+					<input name="Submit1" type="submit" value="Submit" />
+				</td>
+			</tr>
+			
+
+		</table>
+
+
+
+	</form>
+	
+	
+</body>
+
+</html>

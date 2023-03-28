@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+<script src="/validation.js"></script>
+</head>
+<body>
+	<script th:inline="javascript">
+	function genericValidator(o_form)
+	{
+       return true;
+	}
+	</script>
+	<form name="f1" onsubmit="return genericValidator(this)" action="#" th:action="@{/market/market_update}" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" th:text="${reportTitle}">-</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-report" border="0">
+							
+							
+							<tr>
+								<td class="table-report-head-center"><strong>&nbsp;&nbsp;Gun Nickname&nbsp;&nbsp;</strong></td>
+								<td class="table-report-head-center"><strong>&nbsp;&nbsp;Make/Model&nbsp;&nbsp;</strong></td>
+								<td class="table-report-head-center"><strong>&nbsp;&nbsp;Market Value&nbsp;&nbsp;</strong></td>
+								<td class="table-report-head-center"><strong>&nbsp;&nbsp;URL&nbsp;&nbsp;</strong></td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="4"></td>
+							</tr>
+							
+							<tr th:each="row : ${report_ArrayListHashMapStringString}">
+							
+								<td class="table-report-row-left"><NOBR><span class="table-report-row-left" th:text="${row.get('NICKNAME')}"></span></NOBR></td>
+								<td class="table-report-row-center" th:text="${row.get('MAKE') + ' ' + row.get('MODEL')}">-</td>
+								<td class="table-report-row-center"><NOBR><input th:name="${'MARKET_COST_' + row.get('GUN_PK')}" style="text-align: right; width: 80px" th:value="${row.get('MARKET_COST')}" type="text" autocomplete="off" /></NOBR></td>
+								<td class="table-report-row-center"><NOBR><input th:name="${'MARKET_URL_' + row.get('GUN_PK')}" style="width: 200px" value="" type="text" autocomplete="off" /></NOBR></td>
+					
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space" colspan="4">&nbsp;</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space" colspan="4"><input name="Submit1" type="submit" value="Submit" /></td>
+							</tr>
+							
+
+												
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+		</table>
+
+
+
+	</form>
+</body>
+
+</html>
+
+
+
+
+
+

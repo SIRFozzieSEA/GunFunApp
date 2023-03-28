@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+<script src="/validation.js"></script>
+</head>
+<body>
+	<script th:inline="javascript">
+		function genericValidator(o_form)
+		{
+			return true;
+		}
+	</script>
+	<form action="#" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header"><span class="message-text" th:text="${reportTitle}" /></td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="final-score" th:text="'Your score is ' + ${#numbers.formatDecimal(score, 0, 'COMMA', 2, 'POINT')} + '%'">-</td>
+			</tr>
+			
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><hr/></td>
+			</tr>
+
+			
+			<tr>
+				<td>
+	
+					<table align="center" border="0" cellpadding="4" cellspacing="4">
+					
+						<th:block th:each="question : ${reviewAllQuestions_ArrayListHashMapStringString}">
+						
+					
+	
+							<tr>
+								<td class="quiz-question-left" valign="top" style="width: 250px" th:text="${question.get('QUESTION')}"></td>
+								<td class="response-block" rowspan="6" valign="top" style="width: 355px">
+									<div th:if="${question.get('IMAGE_LOCATION') == 'REGISTRY'}">
+										<a th:href="'/getImage?imageName=/large/' + ${question.get('NICKNAME')} + '.jpg'" target="_blank">
+													<img th:src="'/getImage?imageName=/small/' + ${question.get('NICKNAME')} + '.jpg'" align="top" /></a>
+									</div>
+									<div th:unless="${question.get('IMAGE_LOCATION') == 'REGISTRY'}">
+										
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="response-block" valign="top" style="width: 250px">
+								
+									<div th:if="${#bools.isTrue(question.get('QUESTION_IS_CORRECT'))}">
+										<span class="correct-response">CORRECT</span>
+									</div>
+									<div th:unless="${#bools.isTrue(question.get('QUESTION_IS_CORRECT'))}">
+										<span class="incorrect-response">INCORRECT</span>
+									</div>
+								
+								</td>
+							</tr>
+	
+	
+							<tr>
+								<td class="response-block" valign="top" style="width: 250px">
+								
+									<div th:if="${#bools.isTrue(question.get('QUESTION_IS_CORRECT'))}">
+										<span class="correct-response-two" th:text="${question.get('CORRECT_RESPONSE')}">CORRECT</span>
+									</div>
+									<div th:unless="${#bools.isTrue(question.get('QUESTION_IS_CORRECT'))}">
+										<span class="correct-response-two" th:text="${question.get('CORRECT_RESPONSE')}"></span><br/>
+										<span class="incorrect-response-two" th:text="${question.get('USER_RESPONSE')}"></span>
+									</div>
+								
+								</td>
+							</tr>
+							
+							<tr>
+								<td class="response-block" valign="top" style="width: 250px">&nbsp;</td>
+							</tr>
+							<tr>
+								<td class="response-block" valign="top" style="width: 250px">&nbsp;</td>
+							</tr>
+							<tr>
+								<td class="response-block" valign="top" style="width: 250px">&nbsp;</td>
+							</tr>
+							
+							<tr>
+								<td class="response-block" valign="top" colspan="2" style="width: 250px">&nbsp;</td>
+							</tr>
+	
+						
+						</th:block>
+						
+						
+					</table>
+					
+			
+					 
+					 
+	
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-space" colspan="1">&nbsp;</td>
+			</tr>
+			
+
+		</table>
+
+
+	</form>
+</body>
+</html>
+

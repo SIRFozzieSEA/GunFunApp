@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+<script src="/validation.js"></script>
+</head>
+<body>
+	<form>
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" colspan="2"><span class="message-text" th:text="${reportTitle}" /></td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space" colspan="2">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="table-report-row-center"><a href="/function/maintenance/rebuild_last_dates" target="main">Rebuild Last Dates</a></td>
+				<td class="table-report-row-center"><a href="/function/maintenance/rebuild_cleaning_report" target="main">Rebuild Cleaning Report</a></td>
+			</tr>
+			
+			<tr>
+				<td class="table-report-row-center"><a href="/function/maintenance/rebuild_questions" target="main">Rebuild Quiz Questions</a></td>
+				<td class="table-report-row-center">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="table-report-row-center"><a href="/function/maintenance/manage_preferences" target="main">Manage Preferences</a></td>
+				<td class="table-report-row-center"><a href="/function/maintenance/manage_valid_calibers" target="main">Manage Valid Calibers</a></td>
+			</tr>
+			
+			<tr>
+				<td class="table-report-row-center"><a href="/function/maintenance/audit_pdf_manuals" target="main">Audit PDFs of Manuals</a></td>
+				<td class="table-report-row-center"></td>
+			</tr>
+			
+			<tr>
+				<td class="main-table-fill-space" colspan="2">&nbsp;</td>
+			</tr>
+			
+			<tr th:if="${#bools.isTrue(showBuildSampleAssets)}">
+				<td class="table-report-row-center">&nbsp;</td>
+				<td class="table-report-row-center"><a href="/function/maintenance/rebuild_sample_data" target="main">Build Sample Assets</a></td>
+			</tr>
+			
+		</table>
+
+	</form>
+</body>
+</html>

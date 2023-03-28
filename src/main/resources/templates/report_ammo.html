@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+	<form action="#" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header"><span class="message-text">Ammo Log - Inventory</span></td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-report" border="0">
+							
+							
+							<tr>
+								<td class="table-report-head-center">Caliber</td>
+								<td class="table-report-head-center">No. of Rounds</td>
+								<td class="table-report-head-center">Last Purchased Date</td>
+								<td class="table-report-head-center">Last Purchased Qty.</td>
+								<td class="table-report-head-center">Last Cost</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="5">&nbsp;</td>
+							</tr>
+							
+							<tr th:each="row : ${report_ArrayListHashMapStringString}">
+
+								<td class="table-report-row-left" th:text="${row.get('CALIBER')}">-</td>
+								<td class="table-report-row-right-more-vspace" style="padding-right: 40px" th:text="${#numbers.formatDecimal(row.get('NO_OF_ROUNDS'), 0, 'COMMA', 0, 'POINT')}">-</td>
+								<td class="table-report-row-center" th:text="${row.get('LAST_PURCHASE_DATE')}">-</td>
+								<td class="table-report-row-right-more-vspace" style="padding-right: 60px" th:text="${#numbers.formatDecimal(row.get('LAST_PURCHASE_QUANTITY'), 0, 'COMMA', 0, 'POINT')}">-</td>
+								<td class="table-report-row-right-more-vspace" style="padding-right: 30px"><NOBR><span class="table-report-row-left-even-more-vspace" th:text="'$' + ${#numbers.formatDecimal(row.get('LAST_PURCHASE_COST'), 0, 'COMMA', 2, 'POINT')}"></span></NOBR></td>
+
+							</tr>
+							
+							<tr>
+								<td class="table-report-head-center"></td>
+								<td class="table-report-total-right" style="padding-right: 40px" th:text="${#numbers.formatDecimal(reportTotal, 0, 'COMMA', 0, 'POINT')}">-</td>
+								<td class="table-report-head-center" style="background-color: green; color: white" colspan="3">TOTAL CURRENT INVENTORY</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" style="padding-top: 20px" colspan="5">&nbsp;</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="5" style="padding-bottom: 6px"><span class="message-text">Ammo Log - Consumed</span></td>
+							</tr>
+							
+							<tr>
+								<td class="table-report-head-center">Caliber</td>
+								<td class="table-report-head-center">No. of Rounds</td>
+								<td class="table-report-head-center">Last Fired Date</td>
+								<td class="table-report-head-center">Last Purchased Qty.</td>
+								<td class="table-report-head-center">Last Purchased Date</td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="5">&nbsp;</td>
+							</tr>
+							
+							<tr th:each="row : ${report2_ArrayListHashMapStringString}">
+
+								<td class="table-report-row-left" th:text="${row.get('CALIBER')}">-</td>
+								<td class="table-report-row-right-more-vspace" style="padding-right: 40px" th:text="${#numbers.formatDecimal(row.get('NO_OF_ROUNDS'), 0, 'COMMA', 0, 'POINT')}">-</td>
+								<td class="table-report-row-center" th:text="${row.get('LAST_FIRED_DATE')}">-</td>
+								<td class="table-report-row-right-more-vspace" style="padding-right: 60px" th:text="${#numbers.formatDecimal(row.get('LAST_PURCHASE_QUANTITY'), 0, 'COMMA', 0, 'POINT')}">-</td>
+								<td class="table-report-row-center" th:text="${row.get('LAST_PURCHASE_DATE')}">-</td>
+
+							</tr>
+							
+							<tr>
+								<td class="table-report-head-center"></td>
+								<td class="table-report-total-right" style="padding-right: 40px" th:text="${#numbers.formatDecimal(reportTotal2, 0, 'COMMA', 0, 'POINT')}">-</td>
+								<td class="table-report-head-center" style="background-color: red; color: white" colspan="3">TOTAL FIRED SINCE LAST ORDERED</td>
+							</tr>
+							
+							
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+			<tr>
+				<td class="main-table-fill-space">&nbsp;</td>
+			</tr>
+			
+
+		</table>
+
+
+
+	</form>
+	
+	
+</body>
+
+</html>

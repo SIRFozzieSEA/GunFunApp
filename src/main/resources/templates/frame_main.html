@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control" />
+<meta content="no-cache" http-equiv="Pragma" />
+<meta content="0" http-equiv="Expires" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+
+<div th:if="${MESSAGE}">
+	<p class="message-text" th:text="${MESSAGE}">--</p>
+</div>
+<div th:if="${MESSAGETWO}">
+	<p class="message-text" th:text="${MESSAGETWO}">--</p>
+</div>
+<div th:if="${MESSAGEDETAILS}">
+	<div align="center" valign="top">
+		<table class="table-stats" border="0">
+			<tr>
+				<td class="stats-left" th:text="${MESSAGEDETAILS}"></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div th:if="${totalGuns > 0}">
+	<div align="center" valign="top">
+	
+		<table class="table-stats" border="0">
+			
+			<tr>
+				<td valign="top">
+				
+				
+					<table border="0" style="width: 250px">
+						<tr>
+							<td class="stats-head" colspan="2">Total Guns</td>
+						</tr>
+						<tr>
+							<td class="stats-right">&nbsp;</td>
+							<td class="stats-right" th:text="${totalGuns}"></td>
+						</tr>
+						<tr>
+							<td class="main-table-fill-space-smaller" colspan="2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="stats-head" colspan="2">Costs</td>
+						</tr>
+						
+						
+						<tr>
+							<td class="stats-right">Total Paid</td>
+							<td class="stats-right" th:text="'$' + ${#numbers.formatDecimal(totalCost, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="stats-right">Total Market</td>
+							<td class="stats-right" th:text="'$' + ${#numbers.formatDecimal(totalMarketCost, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="stats-right">Total Difference</td>
+							<td class="stats-right" th:text="'$' + ${#numbers.formatDecimal(totalDifferenceCost, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="stats-right">Max Paid</td>
+							<td class="stats-right" th:text="'$' + ${#numbers.formatDecimal(maxCost, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="stats-right">Avg Paid</td>
+							<td class="stats-right" th:text="'$' + ${#numbers.formatDecimal(avgCost, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="stats-right">Min Paid</td>
+							<td class="stats-right" th:text="'$' + ${#numbers.formatDecimal(minCost, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="main-table-fill-space-smaller" colspan="2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="stats-head" colspan="2">Barrel Length (in)</td>
+						</tr>
+						<tr>
+							<td class="stats-right">Max</td>
+							<td class="stats-right" th:text="${#numbers.formatDecimal(maxBarrel, 0, 'COMMA', 2, 'POINT')}"></td>
+							
+						</tr>
+						<tr>
+							<td class="stats-right">Avg</td>
+							<td class="stats-right" th:text="${#numbers.formatDecimal(avgBarrel, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="stats-right">Min</td>
+							<td class="stats-right" th:text="${#numbers.formatDecimal(minBarrel, 0, 'COMMA', 2, 'POINT')}"></td>
+						</tr>
+						<tr>
+							<td class="main-table-fill-space-smaller" colspan="2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="stats-head" colspan="2">Calibers</td>
+						</tr>
+						<tr th:each="row : ${calibers_ArrayListHashMapStringString}">
+							<td class="stats-right" th:text="${row.get('CALIBER')}"></td>
+							<td class="stats-right" th:text="${row.get('TOTAL_COUNT')}"></td>
+						</tr>
+						<tr>
+							<td class="main-table-fill-space-smaller" colspan="2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="stats-head" colspan="2">Frame Materials</td>
+						</tr>
+						<tr th:each="row : ${frameMaterials_ArrayListHashMapStringString}">
+							<td class="stats-right" th:text="${row.get('FRAME_MATERIAL')}"></td>
+							<td class="stats-right" th:text="${row.get('TOTAL_COUNT')}"></td>
+						</tr>				
+					</table>
+				
+				</td>
+				
+				<td style="width: 110px">&nbsp;</td>
+				
+				<td valign="top" align="right">
+				
+					<table border="0" style="width: 250px">
+						<tr>
+							<td class="stats-head" colspan="2">Manufacturers</td>
+						</tr>
+						<tr th:each="row : ${manufacturers_ArrayListHashMapStringString}">
+							<td class="stats-manufacturers" th:text="${row.get('MAKE')}"></td>
+							<td class="" th:text="${row.get('TOTAL_COUNT')}"></td>
+						</tr>
+					</table>
+
+				
+				</td>
+			</tr>
+			
+			
+		</table>
+	</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>GunFun App</title>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+	<form action="#" method="post">
+
+		<table align="center" border="0">
+
+			<tr>
+				<td class="main-table-bold-header" th:text="${reportTitle}">-</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<div align="center" valign="top">
+						<table class="table-report" border="0">
+							
+							
+							<tr>
+								<td class="table-report-head-center"><strong>Gun&nbsp;<br/>&nbsp;Nickname</strong></td>
+								<td class="table-report-head-center"><strong>Make/Model</strong></td>
+								<td class="table-report-head-center"><strong>Purchase<br/>Cost</strong></td>
+								<td class="table-report-head-center"><strong>Market<br/>Value</strong></td>
+								<td class="table-report-head-center"><strong>Market<br/>Average</strong></td>
+								<td class="table-report-head-center"><strong>Market Date</strong></td>
+								<td class="table-report-head-center"><strong>URL</strong></td>
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="7"></td>
+							</tr>
+							
+							<tr th:each="row : ${report_ArrayListHashMapStringString}">
+								<td class="table-report-row-left-more-vspace"><NOBR><span class="table-report-row-left-more-vspace" th:text="${row.get('NICKNAME')}"></span></NOBR></td>
+								<td class="table-report-row-left-more-vspace" th:text="${row.get('MAKE') + ' ' + row.get('MODEL')}">-</td>
+								<td class="table-report-row-right-more-vspace"><NOBR><span class="table-report-row-left-more-vspace" th:text="'$' + ${#numbers.formatDecimal(row.get('PURCHASE_COST'), 0, 'COMMA', 0, 'POINT')}"></span></NOBR></td>
+								<td class="table-report-row-right-more-vspace"><NOBR><span class="table-report-row-left-more-vspace" th:text="'$' + ${#numbers.formatDecimal(row.get('MARKET_COST'), 0, 'COMMA', 0, 'POINT')}"></span></NOBR></td>
+								
+								<td class="table-report-row-right-more-vspace"><NOBR><strong>
+								
+								<div th:if="${#strings.startsWith(row.get('CURRENT_VALUE_CHANGE'), '-')}">
+								  <font color="red">
+								</div>
+								<div th:unless="${#strings.startsWith(row.get('CURRENT_VALUE_CHANGE'), '-')}">
+								  <font color="green">
+								</div>
+								
+								<span class="table-report-row-left-more-vspace" th:text="'$' + ${#numbers.formatDecimal(row.get('CURRENT_VALUE_CHANGE'), 0, 'COMMA', 0, 'POINT')}"></span>
+								
+								</font>
+								
+								</strong></NOBR></td>
+								
+								<td class="table-report-row-right-more-vspace"><NOBR><span class="table-report-row-left-more-vspace" th:text="${row.get('MARKET_COST_DATE')}"></span></NOBR></td>
+					
+								
+								<div th:if="${#strings.startsWith(row.get('MARKET_URL'), 'http')}">
+									<td class="table-report-row-center"><NOBR><a th:href="${row.get('MARKET_URL')}" target="_blank">X</a></span></NOBR></td>
+								</div>
+								<div th:unless="${#strings.startsWith(row.get('MARKET_URL'), 'http')}">
+									<td class="table-report-row-center">&nbsp;</td>
+								</div>
+								
+							</tr>
+							
+							<tr>
+								<td class="main-table-fill-space-smaller" colspan="7"></td>
+							</tr>
+							
+							<tr>
+								<td class="table-report-total-right" colspan="2">TOTAL</td>
+								<td class="table-report-total-right"><strong><span class="table-report-total-right" th:text="'$' + ${#numbers.formatDecimal(SumPC, 0, 'COMMA', 0, 'POINT')}"></span></strong></td>
+								<td class="table-report-total-right"><strong><span class="table-report-total-right" th:text="'$' + ${#numbers.formatDecimal(SumMK, 0, 'COMMA', 0, 'POINT')}"></span></strong></td>
+
+
+								<td class="table-report-total-right"><strong>
+								
+								<div th:if="${#strings.startsWith(SumDIFF, '-')}">
+								  <font color="red">
+								</div>
+								<div th:unless="${#strings.startsWith(SumDIFF, '-')}">
+								  <font color="green">
+								</div>
+								
+								<span class="table-report-total-right" th:text="'$' + ${#numbers.formatDecimal(SumDIFF, 0, 'COMMA', 0, 'POINT')}"></span>
+								
+								</font>
+								
+								</strong></td>
+								<td class="table-report-total-right" colspan="2">&nbsp;</td>
+
+
+							</tr>
+												
+						</table>
+					</div>
+				</td>
+			</tr>
+		
+		</table>
+
+
+
+	</form>
+</body>
+
+</html>
+
+
+
