@@ -172,6 +172,7 @@ public class CarryController {
 				String dateParameterName = "CARRIED_DATE_" + formFieldKey;
 				java.sql.Date dateCarried = SystemUtils.parseDate(request.getParameter(dateParameterName));
 				boolean needBlanklines = checkBlankLinesNeeded(conn, possibleNicknameValue, dateCarried);
+
 				if (possibleNicknameValue.equals("")) {
 					// empty entry
 					if (needBlanklines) {
@@ -212,6 +213,10 @@ public class CarryController {
 
 	// FUNCTIONS -----------------------------
 
+	// TODO: NEED TO CHECK THIS LOGIC HERE, BUT FOR CLEANING UP, YOU CAN USE:
+	// DELETE FROM CARRY_SESSIONS WHERE NICKNAME is null and CARRIED_DATE in
+	// (SELECT CARRIED_DATE FROM CARRY_SESSIONS WHERE NICKNAME is not null)
+
 	private boolean checkBlankLinesNeeded(Connection conn, String nickname, java.sql.Date dateCarried)
 			throws SQLException {
 
@@ -234,7 +239,8 @@ public class CarryController {
 			if (Long.parseLong(totalEmptyLines) > 0) {
 				return false;
 			} else {
-				String sql = "DELETE FROM carry_sessions WHERE NICKNAME = '' AND CARRIED_DATE = '" + dateCarried + "'";
+				String sql = "DELETE FROM carry_sessions WHERE (NICKNAME is NULL OR NICKNAME = '') AND CARRIED_DATE = '"
+						+ dateCarried + "'";
 				SystemUtils.executeSQL(conn, sql);
 				return true;
 			}
