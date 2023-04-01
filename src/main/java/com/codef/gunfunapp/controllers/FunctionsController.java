@@ -1,9 +1,8 @@
 package com.codef.gunfunapp.controllers;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -12,9 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TreeSet;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +34,8 @@ import com.codef.gunfunapp.repos.PreferenceRepo;
 import com.codef.gunfunapp.repos.RegistryRepo;
 import com.codef.gunfunapp.repos.TriviaQuestionTemplateRepo;
 import com.codef.gunfunapp.repos.ValidCaliberRepo;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class FunctionsController {
@@ -155,10 +155,12 @@ public class FunctionsController {
 		if (request.getParameter("what").equals("ALL") || request.getParameter("what").equals("PROPERTIES")) {
 			backedUpItems.add("Properties");
 
-			// TODO: Figure out why this errors out when running outside Eclipse
-
-			Path resourceDirectory = Paths.get("target", "classes");
-			String pathToResources = resourceDirectory.toFile().getAbsolutePath() + "\\application.properties";
+			Properties properties = new Properties();
+            FileInputStream fileInputStream = new FileInputStream("application.properties");
+            properties.load(fileInputStream);
+            fileInputStream.close();
+			
+			
 			String backupFolderLocation = gunFunAppLocation + "\\_backup\\"
 					+ new Date(System.currentTimeMillis()).toString() + " application.properties";
 
@@ -167,7 +169,7 @@ public class FunctionsController {
 				oDirectory.delete();
 			}
 
-			SystemUtils.copyFile(pathToResources, backupFolderLocation);
+			SystemUtils.writeStringToFile(properties.toString(), backupFolderLocation);
 		}
 
 		if (request.getParameter("what").equals("ALL") || request.getParameter("what").equals("SQL")) {

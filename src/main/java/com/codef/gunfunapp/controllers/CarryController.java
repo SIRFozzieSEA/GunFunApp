@@ -139,7 +139,7 @@ public class CarryController {
 					boolean needBlanklines = checkBlankLinesNeeded(conn, "", dateCarried);
 					if (needBlanklines) {
 						gunCarrySessionsRepo
-								.save(new CarrySession("", dateCarried, SystemUtils.getDayFromDate(dateCarried)));
+								.save(new CarrySession(null, dateCarried, SystemUtils.getDayFromDate(dateCarried)));
 					}
 				}
 			}
@@ -177,7 +177,7 @@ public class CarryController {
 					// empty entry
 					if (needBlanklines) {
 						gunCarrySessionsRepo
-								.save(new CarrySession("", dateCarried, SystemUtils.getDayFromDate(dateCarried)));
+								.save(new CarrySession(null, dateCarried, SystemUtils.getDayFromDate(dateCarried)));
 					}
 				} else {
 					if (needBlanklines) {
@@ -213,7 +213,7 @@ public class CarryController {
 
 	// FUNCTIONS -----------------------------
 
-	// TODO: NEED TO CHECK THIS LOGIC HERE, BUT FOR CLEANING UP, YOU CAN USE:
+	// Clean Up SQL:
 	// DELETE FROM CARRY_SESSIONS WHERE NICKNAME is null and CARRIED_DATE in
 	// (SELECT CARRIED_DATE FROM CARRY_SESSIONS WHERE NICKNAME is not null)
 
@@ -239,7 +239,7 @@ public class CarryController {
 			if (Long.parseLong(totalEmptyLines) > 0) {
 				return false;
 			} else {
-				String sql = "DELETE FROM carry_sessions WHERE (NICKNAME is NULL OR NICKNAME = '') AND CARRIED_DATE = '"
+				String sql = "DELETE FROM carry_sessions WHERE (NICKNAME is NULL) AND CARRIED_DATE = '"
 						+ dateCarried + "'";
 				SystemUtils.executeSQL(conn, sql);
 				return true;
