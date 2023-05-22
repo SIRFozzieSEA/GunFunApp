@@ -30,11 +30,11 @@ public class MainController {
 
 	@Autowired
 	private Environment env;
-	
+
 	@Autowired
 	@Qualifier("jdbcMaster")
 	private JdbcTemplate jdbcTemplateOne;
-	
+
 //	private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
 	/*
@@ -55,16 +55,15 @@ public class MainController {
 			e.printStackTrace();
 			return "index_nc";
 		}
-		
+
 //		LOGGER.trace("A TRACE Message");
 //		LOGGER.debug("A DEBUG Message");
 //		LOGGER.info("An INFO Message");
 //		LOGGER.warn("A WARN Message");
 //		LOGGER.error("An ERROR Message");
-        
+
 		return "index";
-		
-		
+
 	}
 
 	@GetMapping("/frame_navigation")
@@ -75,7 +74,7 @@ public class MainController {
 	@GetMapping("/frame_main")
 	public String frameMain(@RequestParam(name = "showStats", required = false) boolean showStats, Model model)
 			throws SQLException, IOException {
-		
+
 		ModelUtils mu = new ModelUtils(model);
 		if (showStats) {
 
@@ -133,6 +132,37 @@ public class MainController {
 				mu.addToModel("frameMaterials_ArrayListHashMapStringString",
 						SystemUtils.makeSQLAsArrayListHashMapPlain(conn, sql));
 
+				sql = "SELECT GUN_TYPE, count(GUN_TYPE) as TOTAL_COUNT FROM registry GROUP BY GUN_TYPE ORDER BY GUN_TYPE";
+				mu.addToModel("gunType_ArrayListHashMapStringString",
+						SystemUtils.makeSQLAsArrayListHashMapPlain(conn, sql));
+
+				String firstDayCarry = SystemUtils.getStringValueFromTable(conn,
+						"SELECT MIN(CARRIED_DATE) as MIN_CARRIED_DATE FROM CARRY_SESSIONS", "MIN_CARRIED_DATE");
+				mu.addToModel("carry_firstDay", firstDayCarry);
+				String totalPotentialCarryDays = SystemUtils.getStringValueFromTable(conn,
+						"SELECT DATEDIFF('DAY', MIN(CARRIED_DATE), NOW()) AS TOTAL_DAYS FROM CARRY_SESSIONS",
+						"TOTAL_DAYS");
+				mu.addToModel("carry_totalPotentialDays", Long.parseLong(totalPotentialCarryDays));
+				String totalDays = SystemUtils.getStringValueFromTable(conn,
+						"SELECT COUNT(DISTINCT CARRIED_DATE) AS TOTAL_DAYS FROM CARRY_SESSIONS WHERE NICKNAME IS NOT NULL AND NICKNAME != ''",
+						"TOTAL_DAYS");
+				mu.addToModel("carry_totalDays", Long.parseLong(totalDays));
+				mu.addToModel("carry_totalPercentage",
+						Double.valueOf(Long.parseLong(totalDays) * 100 / Long.parseLong(totalPotentialCarryDays)));
+				
+				String firstDayRange = SystemUtils.getStringValueFromTable(conn,
+						"SELECT MIN(FIRED_DATE) as MIN_FIRED_DATE FROM SHOOTING_SESSIONS", "MIN_FIRED_DATE");
+				mu.addToModel("range_firstDay", firstDayRange);
+				String totalPotentialRangeDays = SystemUtils.getStringValueFromTable(conn,
+						"SELECT DATEDIFF('DAY', MIN(FIRED_DATE), NOW()) AS TOTAL_DAYS FROM SHOOTING_SESSIONS",
+						"TOTAL_DAYS");
+				mu.addToModel("range_totalPotentialDays", Long.parseLong(totalPotentialRangeDays));
+				totalDays = SystemUtils.getStringValueFromTable(conn,
+						"SELECT COUNT(DISTINCT FIRED_DATE) AS TOTAL_DAYS FROM SHOOTING_SESSIONS", "TOTAL_DAYS");
+				mu.addToModel("range_totalDays", Long.parseLong(totalDays));
+				mu.addToModel("range_totalPercentage",
+						Double.valueOf(Long.parseLong(totalDays) * 100 / Long.parseLong(totalPotentialRangeDays)));
+
 			}
 
 			mu.addToModel("totalGuns", Long.parseLong(totalGuns));
@@ -142,7 +172,7 @@ public class MainController {
 		} else {
 			mu.addToModel("totalGuns", Long.parseLong("0"));
 		}
-		
+
 		mu.printJson();
 		return "frame_main";
 	}
@@ -193,12 +223,12 @@ public class MainController {
 				"SELECT NICKNAME FROM TRIVIA_ROUND_QUESTIONS WHERE QUESTION_PK = " + questionPk, "NICKNAME");
 		conn.close();
 
-		File img = new File(env.getProperty("GUNFUN_APP_FOLDER") + "\\_images\\" + "\\" + size + "\\" + nickname + ".jpg");
+		File img = new File(
+				env.getProperty("GUNFUN_APP_FOLDER") + "\\_images\\" + "\\" + size + "\\" + nickname + ".jpg");
 		return ResponseEntity.ok()
 				.contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img)))
 				.body(Files.readAllBytes(img.toPath()));
 
 	}
-
 
 }

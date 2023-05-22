@@ -133,6 +133,7 @@ public class RegistryController {
 		mu.addToModel("reportTitle", "Search Registry Entries");
 		mu.addToModel("allMakesSet_TreeSetString", ControllerUtils.getAllMakesValues(gunRegistryRepo));
 		mu.addToModel("allCaliberSet_TreeSetString", ControllerUtils.getAllCaliberValues(validCaliberRepo));
+		mu.addToModel("allGunTypeSet_TreeSetString", ControllerUtils.getAllGunTypesValues(gunRegistryRepo));
 		conn.close();
 
 		mu.printJson();
@@ -175,6 +176,18 @@ public class RegistryController {
 		if (gunModelOrder != null && !gunModelOrder.equals("")) {
 			orderBys.put(Integer.valueOf(gunModelOrder), "MODEL");
 		}
+		
+		
+		String gunTypeValue = request.getParameter("GunTypeDrop");
+		String gunTypeOrAnd = request.getParameter("GunTypeRadio");
+		String gunTypeOrder = request.getParameter("GunTypeOrder");
+		if (!gunTypeValue.equals("")) {
+			subQueries.add("(LOWER(GUN_TYPE) like '%" + gunTypeValue.toLowerCase() + "%') " + gunTypeOrAnd);
+		}
+		if (gunTypeOrder != null && !gunTypeOrder.equals("")) {
+			orderBys.put(Integer.valueOf(gunTypeOrder), "GUN_TYPE");
+		}
+		
 
 		String gunCaliberValue = request.getParameter("CaliberDrop");
 		String gunCaliberOrAnd = request.getParameter("CaliberRadio");

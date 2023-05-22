@@ -44,6 +44,9 @@ public class Registry {
 
 	@Column(name = "caliber", length = 25)
 	private String caliber;
+	
+	@Column(name = "gun_type", length = 25)
+	private String gunType;
 
 	@Column(name = "barrel_length", precision = 10, scale = 2, columnDefinition = "DECIMAL(10,2)")
 	private BigDecimal barrelLength;

@@ -261,17 +261,11 @@ a:hover {
 
 /* stats */
 
-.table-stats {
-	margin-top: 38px;
-    width: auto;
-    padding: 0px;
-    border-spacing: 0px;
-}
-
 .stats-head {
 	font-size: 12pt;
-    font-weight: bold;	
+    font-weight: bold;
 }
+
 .stats-right {
 	text-align: right;
 }
@@ -298,7 +292,7 @@ a:hover {
 }
 
 .field-label-input {
-	margin-top: 3px;
+	margin-top: 2px;
 	width: 168px;
 }
 

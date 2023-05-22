@@ -104,7 +104,32 @@ public class ControllerUtils {
 		return allModelSet;
 
 	}
+	
+	
+	public static String getAllGunTypes(RegistryRepo gunRegistryRepo) {
 
+		TreeSet<String> AllGunTypesSet = getAllGunTypesValues(gunRegistryRepo);
+
+		String AllGunTypes = AllGunTypesSet.toString();
+		AllGunTypes = AllGunTypes.substring(1, AllGunTypes.length() - 1).replace(", ", "|");
+
+		return AllGunTypes;
+	}
+
+	public static TreeSet<String> getAllGunTypesValues(RegistryRepo gunRegistryRepo) {
+
+		TreeSet<String> AllGunTypesSet = new TreeSet<String>();
+
+		List<Registry> gunRegistryEntries = (List<Registry>) gunRegistryRepo.findAll();
+		for (Registry gunRegistry : gunRegistryEntries) {
+			AllGunTypesSet.add(gunRegistry.getGunType());
+		}
+
+		return AllGunTypesSet;
+
+	}
+	
+	
 	public static String getPreferenceStringValue(Connection conn, String prefName) throws SQLException {
 		return SystemUtils.getStringValueFromTable(conn,
 				"SELECT PREFERENCE_VALUE FROM PREFERENCES WHERE PREFERENCE_KEY = '" + prefName

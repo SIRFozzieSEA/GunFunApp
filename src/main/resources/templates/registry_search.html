@@ -95,15 +95,15 @@
 									name="PurchaseDateOrder" style="width: 20px" type="text" autocomplete="off"></td>
 							</tr>
 							<tr>
-								<td><b>Caliber:</b><br>
-									<select  name="CaliberDrop" size="1"
+								<td><b>Type:</b><br>
+									<select  name="GunTypeDrop" size="1"
 									style="width: 182px">
 										<option></option>
-										<option th:each="caliber : ${allCaliberSet_TreeSetString}" th:value="${caliber}" th:text="${caliber}"></option>
+										<option th:each="gunType : ${allGunTypeSet_TreeSetString}" th:value="${gunType}" th:text="${gunType}"></option>
 								</select><br>
-								<input checked="true" name="CaliberRadio" type="radio" value="or ">Or
-									<input name="CaliberRadio" type="radio" value="and"> And
-									&nbsp;&nbsp;&nbsp;Order: <input name="CaliberOrder" style="width: 20px"
+								<input checked="true" name="GunTypeRadio" type="radio" value="or ">Or
+									<input name="GunTypeRadio" type="radio" value="and"> And
+									&nbsp;&nbsp;&nbsp;Order: <input name="GunTypeOrder" style="width: 20px"
 									type="text" autocomplete="off"></td>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 								<td><b>Serial No:</b><br>
@@ -115,12 +115,19 @@
 							</tr>
 							
 							<tr>
-								<td><input name="ShowDirtyOnly" value="Y" type="checkbox" /><b> Show Dirty Only</b></td>
+								<td><b>Caliber:</b><br>
+									<select  name="CaliberDrop" size="1"
+									style="width: 182px">
+										<option></option>
+										<option th:each="caliber : ${allCaliberSet_TreeSetString}" th:value="${caliber}" th:text="${caliber}"></option>
+								</select><br>
+								<input checked="true" name="CaliberRadio" type="radio" value="or ">Or
+									<input name="CaliberRadio" type="radio" value="and"> And
+									&nbsp;&nbsp;&nbsp;Order: <input name="CaliberOrder" style="width: 20px"
+									type="text" autocomplete="off"></td>
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-								<td></td>
+								<td><input name="ShowDirtyOnly" value="Y" type="checkbox" /><b> Show Dirty Only</b></td>
 							</tr>
-							
-							
 							
 						</table>
 					</div>
