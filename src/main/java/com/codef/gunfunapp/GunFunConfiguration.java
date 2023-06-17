@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = { "com.codef.gunfunapp.models.entities", "com.codef.gunfunapp.repos" })
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
-
 public class GunFunConfiguration {
 
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
