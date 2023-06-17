@@ -2,9 +2,12 @@ package com.codef.gunfunapp.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.activation.FileTypeMap;
 
@@ -12,6 +15,7 @@ import javax.activation.FileTypeMap;
 //import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -34,6 +38,26 @@ public class MainController {
 	@Autowired
 	@Qualifier("jdbcMaster")
 	private JdbcTemplate jdbcTemplateOne;
+	
+	@Value("${spring.datasource.jdbcUrl}")
+	private String jdbcPath;
+	
+	@Value("${spring.datasource.driverClassName}")
+	private String jdbcDriver;
+	
+	@Value("${spring.datasource.username}")
+	private String jdbcUsername;
+	
+	@Value("${spring.datasource.password}")
+	private String jdbcPassword;
+	
+	@Value("${server.port}")
+	private String serverPort;
+	
+	@Value("${spring.h2.console.path}")
+	private String h2ConsolePath;
+	
+	
 
 //	private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
@@ -64,6 +88,20 @@ public class MainController {
 
 		return "index";
 
+	}
+	
+	@GetMapping("/h2_login")
+	public String h2Launch(Model model) throws URISyntaxException, IOException {
+		
+		String jsession = getJsessionFromLoginPage("http://localhost:" + serverPort + "/h2-console");
+		model.addAttribute("action", "/h2-console/login.do?jsessionid=" + jsession);
+		model.addAttribute("username", jdbcUsername);
+		model.addAttribute("password", jdbcPassword);
+		model.addAttribute("setting", "Generic H2 (Embedded)");
+		model.addAttribute("driver", jdbcDriver);
+		model.addAttribute("jdbcPath", jdbcPath);
+		model.addAttribute("stylesheet", "http://localhost:" + serverPort + h2ConsolePath + "/stylesheet.css");
+		return "h2_login";
 	}
 
 	@GetMapping("/frame_navigation")
@@ -229,6 +267,23 @@ public class MainController {
 				.contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img)))
 				.body(Files.readAllBytes(img.toPath()));
 
+	}
+	
+	private static String getJsessionFromLoginPage(String host) throws IOException, URISyntaxException {
+		
+		String stdLoginPage = SystemUtils.readStringFromURL(host);
+        String regex = "jsessionid=([^']*)";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(stdLoginPage);
+
+        if (matcher.find()) {
+            String jsessionid = matcher.group(1);
+            return jsessionid;
+        }
+        
+        return null;
+		
 	}
 
 }

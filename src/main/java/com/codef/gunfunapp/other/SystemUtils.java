@@ -5,6 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -309,6 +313,13 @@ public class SystemUtils {
 					System.err.println(e);
 				}
 			});
+		}
+	}
+	
+	public static String readStringFromURL(String requestURL) throws IOException, URISyntaxException {
+		URL o_item_url = new URI(requestURL).toURL();
+		try (InputStream in = o_item_url.openStream()) {
+			return new String(in.readAllBytes(), StandardCharsets.UTF_8);
 		}
 	}
 

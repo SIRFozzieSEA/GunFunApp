@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9" />
+	<title>H2 Console</title>
+	<link rel="stylesheet" type="text/css" th:href="${stylesheet}" />
+	<script type="text/javascript">
+		if (self.name == 'h2result' || self.name == 'h2query' || self.name == 'h2menu') {
+			parent.location = "login.jsp";
+		}
+	</script>
+</head>
+
+<body style="margin: 20px">
+	<form name="login" method="post" th:action=${action} id="login">
+		<table class="login" cellspacing="0" cellpadding="0">
+			<tr class="login">
+				<th class="login">Login</th>
+				<th class="login"></th>
+			</tr>
+			<tr>
+				<td class="login" colspan="2"></td>
+			</tr>
+			<tr class="login">
+				<td class="login">Driver Class:</td>
+				<td class="login"><input type="text" name="driver" th:value="${driver}" style="width:300px;" /></td>
+			</tr>
+			<tr class="login">
+				<td class="login">JDBC URL:</td>
+				<td class="login"><input type="text" name="url" th:value="${jdbcPath}" style="width:300px;" /></td>
+			</tr>
+			<tr class="login">
+				<td class="login">User Name:</td>
+				<td class="login"><input type="text" name="user" th:value="${username}" style="width:200px;" /></td>
+			</tr>
+			<tr class="login">
+				<td class="login">Password:</td>
+				<td class="login"><input type="password" name="password" th:value="${password}" style="width:200px;" /></td>
+			</tr>
+			<tr class="login">
+				<td class="login"></td>
+				<td class="login">
+					<input type="submit" class="button" value="Connect" />
+					<br />
+					<br />
+				</td>
+			</tr>
+		</table>
+		<br />
+		<p class="error"></p>
+		<input type="hidden" name="setting" th:value="${setting}" />
+		<input type="hidden" name="name" th:value="${setting}" />
+		<input type="hidden" name="language" value="en" />
+	</form>
+</body>
+
+</html>
