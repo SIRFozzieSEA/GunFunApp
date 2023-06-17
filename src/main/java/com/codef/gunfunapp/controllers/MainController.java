@@ -94,7 +94,7 @@ public class MainController {
 	public String h2Launch(Model model) throws URISyntaxException, IOException {
 		
 		String jsession = getJsessionFromLoginPage("http://localhost:" + serverPort + "/h2-console");
-		model.addAttribute("action", "/h2-console/login.do?jsessionid=" + jsession);
+		model.addAttribute("action", h2ConsolePath + "/login.do?jsessionid=" + jsession);
 		model.addAttribute("username", jdbcUsername);
 		model.addAttribute("password", jdbcPassword);
 		model.addAttribute("setting", "Generic H2 (Embedded)");
