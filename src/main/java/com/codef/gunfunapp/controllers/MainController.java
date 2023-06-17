@@ -39,7 +39,7 @@ public class MainController {
 	@Qualifier("jdbcMaster")
 	private JdbcTemplate jdbcTemplateOne;
 	
-	@Value("${spring.datasource.url}")
+	@Value("${spring.datasource.jdbcUrl}")
 	private String jdbcPath;
 	
 	@Value("${spring.datasource.driverClassName}")
