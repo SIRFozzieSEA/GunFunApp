@@ -1,8 +1,8 @@
 package com.codef.gunfunapp.controllers;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
+import java.util.Scanner;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,21 +155,21 @@ public class FunctionsController {
 		if (request.getParameter("what").equals("ALL") || request.getParameter("what").equals("PROPERTIES")) {
 			backedUpItems.add("Properties");
 
-			Properties properties = new Properties();
-            FileInputStream fileInputStream = new FileInputStream("application.properties");
-            properties.load(fileInputStream);
-            fileInputStream.close();
-			
-			
-			String backupFolderLocation = gunFunAppLocation + "\\_backup\\"
-					+ new Date(System.currentTimeMillis()).toString() + " application.properties";
+			InputStream inputStream = FunctionsController.class.getClassLoader()
+					.getResourceAsStream("application.properties");
 
-			File oDirectory = new File(backupFolderLocation);
-			if (oDirectory.exists()) {
-				oDirectory.delete();
+			// Check if the resource was found
+			if (inputStream != null) {
+				String propertiesAsString = getResourceInputStream(inputStream);
+				String backupFolderLocation = gunFunAppLocation + "\\_backup\\"
+						+ new Date(System.currentTimeMillis()).toString() + " application.properties";
+				File oDirectory = new File(backupFolderLocation);
+				if (oDirectory.exists()) {
+					oDirectory.delete();
+				}
+				SystemUtils.writeStringToFile(propertiesAsString, backupFolderLocation);
 			}
 
-			SystemUtils.writeStringToFile(properties.toString(), backupFolderLocation);
 		}
 
 		if (request.getParameter("what").equals("ALL") || request.getParameter("what").equals("SQL")) {
@@ -188,6 +188,18 @@ public class FunctionsController {
 		mu.printJson();
 		return "frame_main";
 
+	}
+
+	private String getResourceInputStream(InputStream inputStream) throws IOException {
+		Scanner scanner = new Scanner(inputStream, "UTF-8");
+		StringBuilder stringBuilder = new StringBuilder();
+		while (scanner.hasNextLine()) {
+			stringBuilder.append(scanner.nextLine());
+			stringBuilder.append(System.lineSeparator()); // Add line separator if needed
+		}
+		scanner.close();
+		inputStream.close();
+		return stringBuilder.toString();
 	}
 
 	@GetMapping("/function/maintenance")
