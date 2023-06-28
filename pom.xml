@@ -18,7 +18,7 @@
 	<description>GunFunApp with Spring Boot v3</description>
 
 	<properties>
-		<java.version>18</java.version>
+		<java.version>20</java.version>
 	</properties>
 
 	<dependencies>
